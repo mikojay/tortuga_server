@@ -9,18 +9,28 @@ app.use(cors({credentials:true}))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-require('./db')
+// require('./db')
 
-app.post('/api/messages', require('./controllers/post_message'))
-app.get('/api/messages', require('./controllers/get_messages'))
 
-app.post('/api/channels', require('./controllers/post_channel'))
-app.get('/api/channels', require('./controllers/get_channels'))
-
+// app.post('/api/messages', require('./controllers/post_message'))
+// app.get('/api/messages', require('./controllers/get_messages'))
+//
+// app.post('/api/channels', require('./controllers/post_channel'))
+// app.get('/api/channels', require('./controllers/get_channels'))
+//
+//USERS
 app.get('/api/users', require('./controllers/get_users'))
 
+//SIGNUP & LOGIN
 app.post('/api/signup', require('./controllers/signup'))
 app.post('/api/login', require('./controllers/login'))
+
+//CATEGORIES
+app.get('/api/categories', require('./controllers/get_categories'))
+
+//PLACES
+app.get('/api/places', require('./controllers/get_places'))
+app.post('/api/places', require('./controllers/post_place'))
 
 app.listen(process.env.PORT, (err) => {
 	if (err) {
