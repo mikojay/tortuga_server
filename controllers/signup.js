@@ -11,7 +11,7 @@ module.exports = (req, res) => {
 			db_user.create(req.body).then((user) => {
 				let token = jwt.sign(user.toObject(), process.env.SECRET)
 				res.status(200).json({
-					message: 'You are signde up',
+					message: 'You are signed up',
 					token: token
 				})
 			}).catch((err) => {
