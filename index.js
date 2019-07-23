@@ -32,6 +32,11 @@ app.get('/api/categories', require('./controllers/get_categories'))
 app.get('/api/places', require('./controllers/get_places'))
 app.post('/api/places', require('./controllers/post_place'))
 
+//likes
+
+//dislikes
+
+
 app.listen(process.env.PORT, (err) => {
 	if (err) {
 		console.log('ERROR:', err)

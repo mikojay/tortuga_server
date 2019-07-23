@@ -11,18 +11,30 @@ const db_place = db.model('places', {
 		type: String,
 		required: true
 	},
+	category: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'category',
+		required: [true, ' Category is required']
+	},
 	date: {
 		type: Date,
 		default: Date.now()
+	},
+	address: {
+		type: String,
+		required: [true, ' Address is required']
 	},
 	description: {
 		type: String,
 		required: [true, ' Description is required']
 	},
-	category: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'category',
-		required: [true, ' Category is required']
+	likes: {
+		type: Number,
+		required: false
+	},
+	dislikes: {
+		type: Number,
+		required: false
 	}
 })
 
