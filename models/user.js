@@ -12,6 +12,18 @@ const db_user = db.model('user', {
 	password: {
 		type: String,
 		required: [true, 'User Password is required']
+	},
+	linkedin: {
+		type: String,
+	},
+	facebook: {
+		type: String,
+	},
+	github: {
+		type: String,
+	},
+	whatsapp: {
+		type: String,
 	}
 })
 

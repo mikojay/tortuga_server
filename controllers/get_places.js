@@ -2,11 +2,11 @@ const db_place = require('../models/place')
 
 module.exports = (req, res) => {
 
-// let q = {}
-// if (req.query && req.query.category) {
-// 	q.category = req.query.category
-// }
-	db_place.find().sort('-date').populate({
+	x = '-date'
+	if (req.query.sort) {
+		x = req.query.sort
+	}
+	db_place.find({}).sort(x).populate({
 		path: 'category'
 	}).populate({
 		path: 'author',

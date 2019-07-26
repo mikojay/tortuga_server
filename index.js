@@ -32,9 +32,10 @@ app.get('/api/categories', require('./controllers/get_categories'))
 app.get('/api/places', require('./controllers/get_places'))
 app.post('/api/places', require('./controllers/post_place'))
 
-//likes
-
-//dislikes
+//profile EDIT
+app.patch('/api/profile', require('./controllers/patch_profile'))
+//profile
+app.get('/api/profile', require('./controllers/get_profile'))
 
 
 app.listen(process.env.PORT, (err) => {
