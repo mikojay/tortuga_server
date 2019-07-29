@@ -24,6 +24,9 @@ const db_user = db.model('user', {
 	},
 	whatsapp: {
 		type: String,
+	},
+	instagram: {
+		type: String,
 	}
 })
 
