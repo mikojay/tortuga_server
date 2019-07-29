@@ -3,28 +3,32 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports = (req, res) => {
-	console.log(req.body)
-	// 1. Check if email exists in db
-	db_user.findByIdandUpdate({email: req.body.email}).then((user) => {
-		if (user) {
-			// 2. If email found, match passwords
-			bcrypt.compare(req.body.password, user.password, (err, match) => {
-				if (match) {
-					// 4. If passwords match, res OK
+	let token = req.headers.authorization.split(' ')[1]
+	jwt.verify(token, process.env.SECRET, (err, decoded) => {
+		if (decoded) {
+			console.log('id',decoded._id);
+			console.log(req.body);
+			db_user.findByIdAndUpdate(decoded._id, req.body, {new: true}).then((user) => {
+				if (user) {
+				// send token
 					let token = jwt.sign(user.toObject(), process.env.SECRET)
 					res.status(200).json({
-						message: 'You are logged in',
+						message: 'User updated',
 						token: token
 					})
 				} else {
-					res.send('Sorry, invalid password')
+					res.send('User update failed')
 				}
+			}).catch((err) => {
+				res.status(300).send(err)
 			})
-		} else {
-			res.send('Sorry, email not found')
 		}
-	}).catch((err) => {
-		res.status(300).send(err)
 	})
+
+
+	//
+	// 	console.log(req.body)
+	// 	// 1. decode token
+	// 	// get id
 
 }
