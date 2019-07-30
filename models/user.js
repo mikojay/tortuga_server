@@ -9,6 +9,10 @@ const db_user = db.model('user', {
 		type: String,
 		required: [true, 'User Email is required']
 	},
+	batch: {
+		type: String,
+		required: [true, 'User batch is required']
+	},
 	password: {
 		type: String,
 		required: [true, 'User Password is required']
