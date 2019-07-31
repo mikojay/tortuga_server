@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 require('dotenv').config()
-
+const multer = require('multer')
 const app = express()
 
 app.use(cors({credentials:true}))
@@ -30,7 +30,7 @@ app.get('/api/categories', require('./controllers/get_categories'))
 
 //PLACES
 app.get('/api/places', require('./controllers/get_places'))
-app.post('/api/places', require('./controllers/post_place'))
+app.post('/api/places',multer({ storage: multer.memoryStorage() }).single('file') ,require('./controllers/post_place'))
 
 //profile EDIT
 app.patch('/api/profile', require('./controllers/patch_profile'))

@@ -35,6 +35,9 @@ const db_place = db.model('places', {
 	dislikes: {
 		type: Number,
 		required: false
+	},
+	file:{
+		type:String
 	}
 })
 
