@@ -2,16 +2,24 @@ const db_place = require('../models/place')
 
 module.exports = (req, res) => {
 
-	x = '-date'
+	// sort
+	let sort = '-date'
 	if (req.query.sort) {
-		x = req.query.sort
+		sort = req.query.sort
 	}
-	db_place.find({}).sort(x).populate({
+	// filter
+	let filter = {}
+	if (!req.query.sort) {
+		filter = req.query
+	}
+
+	db_place.find(filter).sort(sort).populate({
 		path: 'category'
 	}).populate({
 		path: 'author',
 		select: 'id name'
 	}).then((data) => {
+		console.log('data', data);
 		res.send(data)
 	}).catch((err) => {
 		res.send(err)
