@@ -17,6 +17,10 @@ const db_user = db.model('user', {
 		type: String,
 		required: [true, 'User Password is required']
 	},
+	file: {
+		type: String,
+		required: [false, 'User Password is required']
+	},
 	linkedin: {
 		type: String,
 	},

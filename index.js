@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 app.get('/api/users', require('./controllers/get_users'))
 
 //SIGNUP & LOGIN
-app.post('/api/signup', require('./controllers/signup'))
+app.post('/api/signup',multer({ storage: multer.memoryStorage() }).single('file'), require('./controllers/signup'))
 app.post('/api/login', require('./controllers/login'))
 
 //CATEGORIES
