@@ -1,13 +1,17 @@
 const db_user = require('../models/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const bycrypt = require('bcrypt')
+
 
 module.exports = (req, res) => {
 	let token = req.headers.authorization.split(' ')[1]
 	jwt.verify(token, process.env.SECRET, (err, decoded) => {
 		if (decoded) {
-			console.log('id',decoded._id);
-			console.log(req.body);
+			bycrypt.hash(req.body.password, 10, (err, encrypted) => {
+				req.body.password = encrypted;
+				console.log('id',decoded._id);
+				console.log(req.body);
 			db_user.findByIdAndUpdate(decoded._id, req.body, {new: true}).then((user) => {
 				if (user) {
 				// send token
@@ -21,6 +25,7 @@ module.exports = (req, res) => {
 				}
 			}).catch((err) => {
 				res.status(300).send(err)
+			})
 			})
 		}
 	})
